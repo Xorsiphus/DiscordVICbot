@@ -36,7 +36,7 @@ async def timer(argv):
 
     messages = []
 
-    for i in range(20):
+    for i in range(len(files)):
         if i % bots_count == bot_id - 1:
             f = open('./unicode/' + files[i], 'rb')
             data = '```\n' + f.read().decode('UTF-8') + '\n```'
