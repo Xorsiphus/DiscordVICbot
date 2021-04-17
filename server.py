@@ -7,8 +7,8 @@ import time
 def main(argv):
 
     channel_id = int(argv[1])
-    bots_count = 17
-    video_fps = 10
+    bots_count = int(argv[2])
+    video_fps = int(argv[3])
 
     delay = (1 / video_fps) * bots_count
 
@@ -29,13 +29,18 @@ def main(argv):
     player_sock.connect(('127.0.0.1', 9901))
     player_sock.send('1'.encode('UTF-8'))
 
-    while connects[0].fileno() != -1:
-        for i in range(bots_count):
-            connects[i].send('1'.encode('UTF-8'))
-            time.sleep(0.95 / video_fps)
+    time.sleep(1.5)
 
-    for i in range(bots_count):
-        connects[i].close()
+    while True:
+        for i in range(bots_count):
+            if connects[i].fileno() != -1:
+                connects[i].send('1'.encode('UTF-8'))
+                time.sleep(0.9 / video_fps)
+            else:
+                exit(0)
+
+    # for i in range(bots_count):
+    #     connects[i].close()
 
 
 if __name__ == '__main__':

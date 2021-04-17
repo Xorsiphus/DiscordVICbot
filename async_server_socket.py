@@ -12,7 +12,9 @@ class ServerSocket:
         self.main_loop = asyncio.new_event_loop()
 
     def set_up(self):
-        pass
+        self.socket.bind(('127.0.0.1', 9901))
+        self.socket.listen(1)
+        self.socket.setblocking(False)
 
     async def accept(self):
         sock, address = await self.main_loop.sock_accept(self.socket)

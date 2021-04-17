@@ -31,15 +31,12 @@ async def timer(argv):
 
     channel = client.get_channel(channel_id)
 
-    if bot_id == 1:
-        channel.send('play music')
-
     files = os.listdir('./unicode')
     files.sort(key=lambda file: len(file))
 
     messages = []
 
-    for i in range(1, 200):
+    for i in range(20):
         if i % bots_count == bot_id - 1:
             f = open('./unicode/' + files[i], 'rb')
             data = '```\n' + f.read().decode('UTF-8') + '\n```'
@@ -58,8 +55,6 @@ async def timer(argv):
         await client.loop.sock_recv(sock, 2)
         await channel.send(mes)
         await asyncio.sleep(delay)
-    await client.close()
-    sock.close()
 
 client.loop.create_task(timer(sys.argv))
 
