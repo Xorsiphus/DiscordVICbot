@@ -1,4 +1,3 @@
-import asyncio
 import socket
 import subprocess
 import sys
@@ -19,6 +18,8 @@ def main():
 @client.command(name='play', help='This command plays songs')
 async def play(ctx):
 
+    print('command detected!')
+
     if len(sys.argv) > 4:
         channel_id = int(sys.argv[1])
         file_name = sys.argv[2]
@@ -28,11 +29,9 @@ async def play(ctx):
         channel_id = 536257258695426099
         file_name = 'ba.mp3'
         bots_count = 17
-        video_fps = 10
+        video_fps = 11
 
     subprocess.Popen("python server.py %d %d %d" % (channel_id, bots_count, video_fps))
-
-    # await asyncio.sleep(bots_count * 2)
 
     sock = socket.socket()
     sock.bind(('127.0.0.1', 9901))
@@ -41,10 +40,8 @@ async def play(ctx):
     sock.listen(1)
 
     conn, addr = await client.loop.sock_accept(sock)
-    # conn, addr = sock.accept()
 
     await client.loop.sock_recv(conn, 2)
-    # conn.recv(2)
 
     await ctx.message.author.voice.channel.connect(reconnect=True)
     guild = ctx.guild

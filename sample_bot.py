@@ -1,5 +1,4 @@
 import socket
-import time
 import discord
 import sys
 import os
@@ -27,7 +26,7 @@ async def timer(argv):
     bot_id = int(argv[1])
     channel_id = int(argv[2])
     bots_count = float(argv[3])
-    delay = float(argv[4])
+    # delay = float(argv[4])
 
     channel = client.get_channel(channel_id)
 
@@ -44,8 +43,6 @@ async def timer(argv):
             # print(data.decode('UTF-8'))
             messages.append(data)
 
-    await asyncio.sleep(0)
-
     sock = socket.socket()
     sock.setblocking(False)
 
@@ -54,7 +51,7 @@ async def timer(argv):
     for mes in messages:
         await client.loop.sock_recv(sock, 2)
         await channel.send(mes)
-        await asyncio.sleep(delay)
+        # await asyncio.sleep(delay)
 
 client.loop.create_task(timer(sys.argv))
 
