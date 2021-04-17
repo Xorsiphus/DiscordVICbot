@@ -1,11 +1,12 @@
 import socket
 import subprocess
+import sys
 import time
 
 
-def main():
-    # parse_video('ba.mp4', 3)
+def main(argv):
 
+    channel_id = int(argv[1])
     bots_count = 17
     video_fps = 10
 
@@ -20,18 +21,22 @@ def main():
 
     for i in range(1, bots_count + 1):
         subprocess.Popen("python sample_bot.py %d %d %d %d" %
-                         (i, 536257258695426099, bots_count, delay))
+                         (i, channel_id, bots_count, delay))
         conn, addr = sockets[i - 1].accept()
         connects.append(conn)
+
+    player_sock = socket.socket()
+    player_sock.connect(('127.0.0.1', 9901))
+    player_sock.send('1'.encode('UTF-8'))
 
     while connects[0].fileno() != -1:
         for i in range(bots_count):
             connects[i].send('1'.encode('UTF-8'))
             time.sleep(0.95 / video_fps)
 
-    # for i in range(bots_count):
-    #     connects[i].close()
+    for i in range(bots_count):
+        connects[i].close()
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv)
