@@ -52,6 +52,7 @@ async def timer(argv):
         await client.loop.sock_recv(sock, 2)
         await channel.send(mes)
         # await asyncio.sleep(delay)
+    await client.close()
 
 client.loop.create_task(timer(sys.argv))
 
