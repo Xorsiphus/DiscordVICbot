@@ -1,5 +1,5 @@
+import socket
 import time
-
 import discord
 import sys
 import os
@@ -31,12 +31,15 @@ async def timer(argv):
 
     channel = client.get_channel(channel_id)
 
+    if bot_id == 1:
+        channel.send('play music')
+
     files = os.listdir('./unicode')
     files.sort(key=lambda file: len(file))
 
     messages = []
 
-    for i in range(30):
+    for i in range(1, 200):
         if i % bots_count == bot_id - 1:
             f = open('./unicode/' + files[i], 'rb')
             data = '```\n' + f.read().decode('UTF-8') + '\n```'
@@ -44,12 +47,19 @@ async def timer(argv):
             # print(data.decode('UTF-8'))
             messages.append(data)
 
-    await asyncio.sleep(5)
+    await asyncio.sleep(0)
+
+    sock = socket.socket()
+    sock.setblocking(False)
+
+    await client.loop.sock_connect(sock, ('127.0.0.1', 9950 + bot_id))
 
     for mes in messages:
+        await client.loop.sock_recv(sock, 2)
         await channel.send(mes)
         await asyncio.sleep(delay)
-    await client.logout()
+    await client.close()
+    sock.close()
 
 client.loop.create_task(timer(sys.argv))
 

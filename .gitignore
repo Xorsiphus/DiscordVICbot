@@ -4,4 +4,7 @@ __pycache__/
 data/
 unicode/
 venv/
+audio/
+
+config.py
 
