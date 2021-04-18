@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix='$$$')
 def main():
     global client
 
-    client.run(TOKENS['TOKEN18'])
+    client.run(TOKENS['TOKEN33'])
 
 
 @client.command(name='play', help='This command plays songs')
@@ -22,7 +22,7 @@ async def play(ctx):
 
     if len(sys.argv) > 4:
         channel_id = int(sys.argv[1])
-        file_name = sys.argv[2]
+        file_name = sys.argv[2]  # audio file
         bots_count = int(sys.argv[3])
         video_fps = int(sys.argv[4])
     else:

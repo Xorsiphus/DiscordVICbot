@@ -2,7 +2,6 @@ import socket
 import discord
 import sys
 import os
-import asyncio
 
 from config import TOKENS
 

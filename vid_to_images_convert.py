@@ -8,12 +8,6 @@ class VideoConvertor:
     def convert_to_images(file_name, frame_skip):
         cap = cv2.VideoCapture('./vids/' + file_name)
 
-        try:
-            if not os.path.exists('data'):
-                os.makedirs('data')
-        except OSError:
-            print('Error: Creating directory of data')
-
         current_frame = 0
         while True:
             ret, frame = cap.read()

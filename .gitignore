@@ -3,8 +3,8 @@
 __pycache__/
 data/
 unicode/
+unicode(10)/
 venv/
 audio/
 
 config.py
-
