@@ -9,6 +9,8 @@ class VideoConvertor:
         cap = cv2.VideoCapture('./vids/' + file_name)
 
         current_frame = 0
+        offset = 0
+
         while True:
             ret, frame = cap.read()
 
@@ -16,19 +18,11 @@ class VideoConvertor:
                 print('Success')
                 break
 
-            if current_frame % frame_skip == 0:
+            if current_frame == round(offset):
                 name = './data/frame' + str(int(current_frame / frame_skip)) + '.jpg'
-                # name2 = './data/frame' + str(int(currentFrame / 10)) + '-resized.jpg'
-                print('Creating...' + name + '; Frame number: ' + str(current_frame))
+                print('Creating...' + name)
                 cv2.imwrite(name, frame)
-
-                # scale_percent = 50  # Процент от изначального размера
-                # width = int(frame.shape[1] * scale_percent / 100)
-                # height = int(frame.shape[0] * scale_percent / 100)
-                # dim = (width, height)
-                # resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-
-                # cv2.imwrite(name2, resized)
+                offset += frame_skip
 
             current_frame += 1
 

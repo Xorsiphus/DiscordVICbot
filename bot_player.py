@@ -12,11 +12,14 @@ client = commands.Bot(command_prefix='$$$')
 def main():
     global client
 
-    client.run(TOKENS['TOKEN33'])
+    client.run(TOKENS['TOKEN38'])
 
 
 @client.command(name='play', help='This command plays songs')
 async def play(ctx):
+
+    if ctx.message.author.id != 254600281680117760:
+        return
 
     print('command detected!')
 
@@ -28,8 +31,8 @@ async def play(ctx):
     else:
         channel_id = 536257258695426099
         file_name = 'ba.mp3'
-        bots_count = 17
-        video_fps = 11
+        bots_count = 37
+        video_fps = 15
 
     subprocess.Popen("python server.py %d %d %d" % (channel_id, bots_count, video_fps))
 

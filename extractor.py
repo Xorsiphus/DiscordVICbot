@@ -32,9 +32,10 @@ class VideoParser:
             f = open('./unicode/' + file_name, 'wb')
             f.write(image.encode('UTF-8'))
             f.close()
-            process = counter / len(files)
-            if process * 20 % 100 == 0:
+            if counter % (int(len(files) / 20)) == 0:
                 print(str(counter) + ' / ' + str(len(files)))
+            counter += 1
+        print(str(counter) + ' / ' + str(len(files)))
 
     @staticmethod
     def parse_audio(file_name):

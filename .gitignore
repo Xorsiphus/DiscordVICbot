@@ -4,6 +4,10 @@ __pycache__/
 data/
 unicode/
 unicode(10)/
+unicode(15)/
+unicode(20)/
+unicode(24)/
+unicode(30)/
 venv/
 audio/
 

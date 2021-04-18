@@ -33,14 +33,14 @@ def main(argv):
     player_sock.connect(('127.0.0.1', 9901))
     player_sock.send('1'.encode('UTF-8'))
 
-    time.sleep(2)
+    time.sleep(1.5)
 
     while True:
         for i in range(bots_count):
             if connects[i].fileno() != -1:
                 connects[i].send('1'.encode('UTF-8'))
                 # sockets.send(i, '1')
-                time.sleep(1 / video_fps)
+                time.sleep(0.89999 / video_fps)
 
     # for i in range(bots_count):
     #     connects[i].close()
