@@ -29,7 +29,7 @@ async def play(ctx):
         bots_count = int(sys.argv[3])
         video_fps = int(sys.argv[4])
     else:
-        channel_id = 536257258695426099
+        channel_id = 834021151310741527
         file_name = 'ba.mp3'
         bots_count = 37
         video_fps = 15
